@@ -12,7 +12,7 @@ Mr. Potato Head is a simple app that allows you to build the Potato Head of your
 
 ## Building
 Clone the repository or download the zip file if you're on Windows, and you should be able to open the project root folder as a project in
-Android Studio.
+Android Studio. From there you can build with Gradle in Android Studio and run.
 
 ## Operation
 Tap the checkboxes to change the Potato Dude. It's not rocket science, really...
