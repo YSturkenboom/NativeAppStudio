@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">MadLibz</string>
     <string name="info_short">Fred is great at making stories. Give him a few words, and see what he
-        can come up with! Come on now, don't be shy!</string>
+        can come up with! Come on now, don\'t be shy!</string>
+    <string-array name="texts_array">
+        <item>Simple</item>
+        <item>Tarzan</item>
+        <item>University</item>
+        <item>Clothes</item>
+        <item>Dance</item>
+    </string-array>
 </resources>

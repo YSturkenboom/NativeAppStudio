@@ -11,14 +11,14 @@ import java.util.ArrayList;
 public class ThinkingStoryActivity extends AppCompatActivity {
 
     Handler delayHandler = new Handler();
-    ArrayList<String> words = new ArrayList<String>();
+    String storyString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thinking_story);
 
-        words = getIntent().getStringArrayListExtra("words");
+        storyString = getIntent().getStringExtra("storyString");
 
         // Adapted from https://stackoverflow.com/questions/41664409/wait-for-5-seconds
         delayHandler.postDelayed(new Runnable() {
@@ -30,7 +30,7 @@ public class ThinkingStoryActivity extends AppCompatActivity {
 
     public void goToStoryShowActivity(){
         Intent intent = new Intent(this, StoryShowActivity.class);
-        intent.putExtra("words", words);
+        intent.putExtra("storyString", storyString);
         startActivity(intent);
         finish();
     }
