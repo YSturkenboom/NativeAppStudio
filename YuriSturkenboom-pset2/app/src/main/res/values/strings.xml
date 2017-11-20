@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">YuriSturkenboom-pset2</string>
+    <string name="app_name">MadLibz</string>
+    <string name="info_short">Fred is great at making stories. Give him a few words, and see what he
+        can come up with! Come on now, don't be shy!</string>
 </resources>
