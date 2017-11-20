@@ -19,8 +19,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+// In this Activity the CheckBox objects' ContentDescription is used to give the CheckBoxes a sort
+// of id. This is probably a crime, but for the time it was the best I could do, and I didn't want
+// to hardcode absolutely everything. (future lesson on custom attribs?)
 public class MainActivity extends AppCompatActivity {
 
+    // These three maps are used to establish a relation between the data representation, the
+    // CheckBoxes themselves and the associated ImageViews. I was hoping to avoid repeated code.
+    // In the end this was probably more trouble than it's worth, and caused me a lot of hassle,
+    // because I didn't have the experience with Java required to debug my own code...
     Map<CharSequence, ImageView> nameToImViewMap = new HashMap<CharSequence, ImageView>();
     Map<CharSequence, Boolean> nameToCheckedBoolMap = new HashMap<CharSequence, Boolean>();
     Map<CharSequence, CheckBox> nameToCheckBoxMap = new HashMap<CharSequence, CheckBox>();
@@ -30,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // It seems intuitive that nameToImViewMap and nameToCheckBoxMap should be static since
+        // they shouldn't change, but I haven't yet figured out how to properly do that, and the
+        // assignment was already taking too long.
         nameToImViewMap.put("Nose", (ImageView) findViewById(R.id.imViewNose));
         nameToImViewMap.put("Body", (ImageView) findViewById(R.id.imViewBody));
         nameToImViewMap.put("Hat", (ImageView) findViewById(R.id.imViewHat));
@@ -73,30 +83,29 @@ public class MainActivity extends AppCompatActivity {
 
         // invert saved checkbox state (toggle)
         nameToCheckedBoolMap.put(name, !nameToCheckedBoolMap.get(name));
+
         update(cB, imV, nameToCheckedBoolMap.get(name));
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Set names = nameToCheckedBoolMap.keySet();
-        for (Object name : names) {
+        Set<CharSequence> names = nameToCheckedBoolMap.keySet();
+
+        // iterate over all checkbox names
+        for (CharSequence name : names) {
             outState.putBoolean(name + "_checked", nameToCheckedBoolMap.get(name));
-            //outState.putSerializable("nameToImViewMap", (Serializable) nameToImViewMap);
-            //outState.putSerializable("nameToCheckBoxMap", (Serializable) nameToCheckBoxMap);
         }
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle outState) {
         super.onRestoreInstanceState(outState);
-        //nameToImViewMap = (Map<CharSequence, ImageView>) outState.get("nameToImViewMap");
-        //nameToCheckBoxMap = (Map<CharSequence, CheckBox>) outState.get("nameToCheckBoxMap");
-
         Set<CharSequence> names = nameToCheckBoxMap.keySet();
+
+        // iterate over all checkbox names
         for (CharSequence name : names){
             Boolean checked =  outState.getBoolean(name + "_checked");
-            System.out.println(name);
             CheckBox cB = nameToCheckBoxMap.get(name);
             ImageView imView = nameToImViewMap.get(name);
             nameToCheckedBoolMap.put(name, checked);
@@ -104,10 +113,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Updates the visual elements, so the checkbox tick and the corresponding imageView of the
+    // Updates the visual elements - the checkbox tick and the corresponding imageView of the
     // Mr. PotatoHead part.
     public void update(CheckBox cB, ImageView imV, Boolean checked){
-        //System.out.println(cB.getId());
         cB.setChecked(checked);
         if (checked) {
             imV.setVisibility(View.VISIBLE);
@@ -116,62 +124,4 @@ public class MainActivity extends AppCompatActivity {
             imV.setVisibility(View.INVISIBLE);
         }
     }
-
-    /*@protected void onPause() {
-        super.onPause();
-
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = prefs.edit();
-
-        for (int i = 0; i < checkedList.length; i ++) {
-            prefsEditor.putBoolean(""+i, checkedList[i]);
-            System.out.println("Stored " + checkedList[i]);
-        }
-        prefsEditor.apply();
-    }
-
-    @Override
-    protected void onResume(){
-        super.onResume();
-
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-
-        for (int i = 0; i < checkedList.length; i ++) {
-            checkedList[i] = prefs.getBoolean(""+i, false);
-            System.out.println("Retrieved " + checkedList[i]);
-        }
-    }*/
-
-
-
-    /*public void onCheckBoxClicked(View view) {
-
-        boolean checked = ((CheckBox) view).isChecked();
-
-
-        String imageViewToBeChanged = "imView" + view.getContentDescription();
-
-
-        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-        alertDialog.setTitle("Alert");
-        alertDialog.setMessage("Alert message to be shown" +  imageViewToBeChanged);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
-
-        View imViewToChange = findViewById(nameToImViewMap.get(view.getContentDescription()));
-
-        if (checked) {
-            imViewToChange.setVisibility(View.VISIBLE);
-        }
-
-        else {
-            imViewToChange.setVisibility(View.INVISIBLE);
-        }
-
-    }*/
 }
