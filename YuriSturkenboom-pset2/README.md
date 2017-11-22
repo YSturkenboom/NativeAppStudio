@@ -1,6 +1,6 @@
 # MadLibz
 
-![screenie](/YuriSturkenboom-pset2/doc/screenshot_p.png)
+![screenie](/YuriSturkenboom-pset2/doc/screenshot_large_l.png)
 
 Requires Android Studio to build!
 Not tested for Android Wear.
