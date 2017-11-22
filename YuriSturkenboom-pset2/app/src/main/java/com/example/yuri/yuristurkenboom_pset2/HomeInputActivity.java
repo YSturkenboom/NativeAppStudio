@@ -141,28 +141,6 @@ public class HomeInputActivity extends AppCompatActivity {
         requiredWord.setText("Word required: " + currentStory.getNextPlaceholder());
     }
 
-    public void selectRandomStory(View view) {
-        int randInt = rnd.nextInt(4);
-        System.out.println(randInt);
-        switch (randInt) {
-            case 0:
-                selectStory("Simple", view);
-                break;
-            case 1:
-                selectStory("Tarzan", view);
-                break;
-            case 2:
-                selectStory("University", view);
-                break;
-            case 3:
-                selectStory("Clothes", view);
-                break;
-            case 4:
-                selectStory("Dance", view);
-                break;
-        }
-    }
-
     public void selectStory(String selection, View _){
         int rawId;
         switch (selection) {
@@ -178,9 +156,28 @@ public class HomeInputActivity extends AppCompatActivity {
             case "Clothes":
                 rawId = R.raw.madlib3_clothes;
                 break;
-            default:
+            case "Dance":
                 rawId = R.raw.madlib4_dance;
                 break;
+            default:
+                int randInt = rnd.nextInt(4);
+                System.out.println(randInt);
+                switch (randInt) {
+                    case 0:
+                        rawId = R.raw.madlib0_simple;
+                        break;
+                    case 1:
+                        rawId = R.raw.madlib1_tarzan;
+                        break;
+                    case 2:
+                        rawId = R.raw.madlib2_university;
+                        break;
+                    case 3:
+                        rawId = R.raw.madlib3_clothes;
+                        break;
+                    default:
+                        rawId = R.raw.madlib4_dance;
+                }
         }
         InputStream is = getResources().openRawResource(rawId);
         currentStory = new Story(is);
