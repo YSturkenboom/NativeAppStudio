@@ -14,20 +14,9 @@
             android:textAlignment="center"
             android:padding="50dp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
-        android:gravity="center|bottom"
-        android:orientation="vertical" >
-
-        <Button
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Stop!"
-            android:onClick="goToHomeActivity"
-            android:background="#df2222"/>
-    </LinearLayout>
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop!"
+        android:onClick="goToHomeActivity"/>
 </LinearLayout>

@@ -2,6 +2,7 @@
     <string name="app_name">MadLibz</string>
     <string name="info_short">Fred is great at making stories. Give him a few words, and see what he
         can come up with! Come on now, don\'t be shy!</string>
+    <string name="info_v_short">Enter a few words to make your own story!</string>
     <string-array name="texts_array">
         <item>Simple</item>
         <item>Tarzan</item>

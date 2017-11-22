@@ -15,8 +15,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ThinkingStoryActivity" />
-        <activity android:name=".StoryShowActivity"/>
+        <activity android:name=".ThinkingStoryActivity"
+            android:parentActivityName="com.example.yuri.yuristurkenboom_pset2.HomeInputActivity" >
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.yuri.yuristurkenboom_pset2.HomeInputActivity" />
+        </activity>
+
+        <activity android:name=".StoryShowActivity"
+            android:parentActivityName="com.example.yuri.yuristurkenboom_pset2.HomeInputActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.yuri.yuristurkenboom_pset2.HomeInputActivity" />
+        </activity>
     </application>
 
 </manifest>

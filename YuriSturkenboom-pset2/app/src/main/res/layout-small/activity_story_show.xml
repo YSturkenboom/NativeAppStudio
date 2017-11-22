@@ -6,18 +6,15 @@
     android:layout_height="match_parent"
     tools:context="com.example.yuri.yuristurkenboom_pset2.StoryShowActivity">
 
-    <TextView
-        android:layout_margin="10dp"
-        android:textSize="18sp"
-        android:id="@+id/textResult"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <Button
-        android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back"
         android:onClick="goToHomeActivity"/>
+
+    <TextView
+        android:id="@+id/textResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

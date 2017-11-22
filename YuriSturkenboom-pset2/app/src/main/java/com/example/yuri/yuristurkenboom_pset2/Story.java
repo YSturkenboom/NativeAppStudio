@@ -67,6 +67,8 @@ public class Story implements Serializable {
         }
     }
 
+    public void setHtmlMode(Boolean bool) { htmlMode = bool; }
+
     /** returns total number of placeholders in the story */
     public int getPlaceholderCount() {
         return placeholders.size();
