@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MadLibz</string>
+    <string name="app_name">Fred the Storyteller</string>
     <string name="info_expanded">First, choose a story from the drop-down menu. The required word
         type will then be displayed, think of such a word and type in the text field. Press OK
         to submit a word. Continue doing this until no more words are required, and press Go!</string>
