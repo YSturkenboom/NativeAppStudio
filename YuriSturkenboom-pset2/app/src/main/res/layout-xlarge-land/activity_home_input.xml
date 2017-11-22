@@ -57,6 +57,7 @@
                 android:layout_width="30dp"
                 android:layout_height="40dp"
                 android:text="\?"
+                android:onClick="showInfo"
                 android:textSize="12sp"/>
 
         </LinearLayout>

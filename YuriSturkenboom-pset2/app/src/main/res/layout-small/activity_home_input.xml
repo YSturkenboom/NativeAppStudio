@@ -32,6 +32,7 @@
             android:minHeight="0dp"
             android:minWidth="0dp"
             android:text="\?"
+            android:onClick="showInfo"
             android:textSize="12sp"/>
 
     </LinearLayout>

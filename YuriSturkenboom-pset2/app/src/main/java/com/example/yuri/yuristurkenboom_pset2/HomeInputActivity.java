@@ -1,10 +1,12 @@
 package com.example.yuri.yuristurkenboom_pset2;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -84,6 +86,14 @@ public class HomeInputActivity extends AppCompatActivity {
         catch (Exception e) {
             System.out.println("No story loaded, probably arrived here from another activity");
         }
+    }
+
+    public void showInfo(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.info_expanded).setTitle("Info")
+                .setPositiveButton("Got it!", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {}})
+                .show();
     }
 
     public void goToThinkingStoryActivity(View view){

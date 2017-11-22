@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">MadLibz</string>
+    <string name="info_expanded">First, choose a story from the drop-down menu. The required word
+        type will then be displayed, think of such a word and type in the text field. Press OK
+        to submit a word. Continue doing this until no more words are required, and press Go!</string>
     <string name="info_short">Fred is great at making stories. Give him a few words, and see what he
         can come up with! Come on now, don\'t be shy!</string>
     <string name="info_v_short">Enter a few words to make your own story!</string>
