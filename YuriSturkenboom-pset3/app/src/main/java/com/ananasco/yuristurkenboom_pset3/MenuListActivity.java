@@ -28,7 +28,7 @@ public class MenuListActivity extends AppCompatActivity {
     String origin;
     String category;
     ArrayAdapter<String> itemArrayAdapter;
-    List<String> itemList;
+    List<String> itemList = new ArrayList<>();
     Map<String, JSONObject> nameToJSONObjMap;
 
     @Override
@@ -111,21 +111,18 @@ public class MenuListActivity extends AppCompatActivity {
     public List<String> parseJSON(String response) throws JSONException {
         JSONObject object = new JSONObject(response);
         JSONArray arr = object.getJSONArray("items");
+        List<String> itemList = new ArrayList<>();
 
         // only keep items in the relevant category
         for (int i = 0; i < arr.length(); i++) {
             JSONObject obj = new JSONObject((String) arr.get(i));
             if (obj.getString("category").equals(category)){
+                itemList.add(obj.getString("name"));
 
-                // put in map for easy access later
+                // put in map for easy access later when we go to an item page, might as well
                 nameToJSONObjMap.put(obj.getString("name"), obj);
             }
         }
-
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < arr.length(); i++) {
-            list.add(arr.getString(i));
-        }
-        return list;
+        return itemList;
     }
 }
