@@ -1,7 +1,10 @@
 package com.ananasco.yuristurkenboom_pset3;
 
+import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +33,7 @@ public class MenuListActivity extends AppCompatActivity {
     String category;
     ArrayAdapter<String> itemArrayAdapter;
     List<String> itemList = new ArrayList<>();
+    Map<String, JSONObject> nameToJSONObjMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,10 @@ public class MenuListActivity extends AppCompatActivity {
 
         origin =  getIntent().getStringExtra("origin");
         category = getIntent().getStringExtra("category");
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(category.substring(0, 1).toUpperCase()
+                + category.substring(1));
 
         final ListView listView = findViewById(R.id.listView);
 
@@ -59,6 +68,18 @@ public class MenuListActivity extends AppCompatActivity {
                 addToOrder(item, cost);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void addToOrder(String itemString, double cost){
@@ -118,9 +139,8 @@ public class MenuListActivity extends AppCompatActivity {
             JSONObject obj = (JSONObject) arr.get(i);
             itemList.add(obj.getString("name"));
 
-            // EDIT: this is stupid we can just query JSON
             // put in map for easy access later when we go to an item page, might as well
-            //nameToJSONObjMap.put(obj.getString("name"), obj);
+            nameToJSONObjMap.put(obj.getString("name"), obj);
         }
         return itemList;
     }
