@@ -1,12 +1,10 @@
 package com.ananasco.yuristurkenboom_pset3;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,64 +19,66 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
-// TODO: Vread stuff from JSON, layouts, activity nav., implement assignment, non-anonymous listeners
+public class MenuListActivity extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity {
-
-    ArrayAdapter<String> arrayAdapter;
-    List<String> categoriesArray = new ArrayList<>();
+    String origin;
+    String category;
+    ArrayAdapter<String> itemArrayAdapter;
+    List<String> itemList;
+    Map<String, JSONObject> nameToJSONObjMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_menu_list);
+
+        origin =  getIntent().getStringExtra("origin");
+        category = getIntent().getStringExtra("category");
 
         final ListView listView = findViewById(R.id.listView);
 
-        arrayAdapter = new ArrayAdapter<>(
+        itemArrayAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
-                categoriesArray);
+                itemList);
 
-        listView.setAdapter(arrayAdapter);
+        listView.setAdapter(itemArrayAdapter);
         doVolleyStuff();
-        arrayAdapter.notifyDataSetChanged();
+        itemArrayAdapter.notifyDataSetChanged();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object o = listView.getItemAtPosition(position);
-                String destination = o.toString();
-                navigateToMenu("categories", destination);
+                String item = o.toString();
+                //get cost
+                double cost = 0;
+                addToOrder(item, cost);
             }
         });
     }
 
-    public void navigateToMenu(String context, String destination){
-        Intent intent = new Intent(this, MenuListActivity.class);
-        intent.putExtra("origin", "main");
-        intent.putExtra("category", destination);
-        startActivity(intent);
-        finish();
+    public void addToOrder(String itemString, double cost){
+        // blah blah do stuff
     }
 
     public void updateList(List<String> listString) {
-        arrayAdapter.clear();
-        arrayAdapter.addAll(listString);
-        arrayAdapter.notifyDataSetChanged();
+        itemArrayAdapter.clear();
+        itemArrayAdapter.addAll(listString);
+        itemArrayAdapter.notifyDataSetChanged();
     }
+
 
     // Note: all stuff that needs to be done async needs to be in the listener!
     public void doVolleyStuff(){
         RequestQueue queue = Volley.newRequestQueue(this);
 
         String location = "https://resto.mprog.nl/";
-        String endpoint = "categories";
+        String endpoint = "items";
         String url = location + endpoint;
 
         final TextView mTextView = findViewById(R.id.text);
@@ -107,10 +107,21 @@ public class MainActivity extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-    // assumed input array in an object: {'bla': ['whatever','stuff']}
+    // different from the one in main, there has to be a better way to do this...
     public List<String> parseJSON(String response) throws JSONException {
         JSONObject object = new JSONObject(response);
-        JSONArray arr = object.getJSONArray("categories");
+        JSONArray arr = object.getJSONArray("items");
+
+        // only keep items in the relevant category
+        for (int i = 0; i < arr.length(); i++) {
+            JSONObject obj = new JSONObject((String) arr.get(i));
+            if (obj.getString("category").equals(category)){
+
+                // put in map for easy access later
+                nameToJSONObjMap.put(obj.getString("name"), obj);
+            }
+        }
+
         List<String> list = new ArrayList<>();
         for (int i = 0; i < arr.length(); i++) {
             list.add(arr.getString(i));
