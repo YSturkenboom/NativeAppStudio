@@ -29,7 +29,6 @@ public class MenuListActivity extends AppCompatActivity {
     String category;
     ArrayAdapter<String> itemArrayAdapter;
     List<String> itemList = new ArrayList<>();
-    Map<String, JSONObject> nameToJSONObjMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,10 +77,12 @@ public class MenuListActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
 
         String location = "https://resto.mprog.nl/";
-        String endpoint = "items";
-        String url = location + endpoint;
+        String endpoint = "menu";
+        String query = "?category=" + category;
+        String url = location + endpoint + query;
 
-        final TextView mTextView = findViewById(R.id.text);
+        System.out.println(url);
+
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -113,15 +114,13 @@ public class MenuListActivity extends AppCompatActivity {
         JSONArray arr = object.getJSONArray("items");
         List<String> itemList = new ArrayList<>();
 
-        // only keep items in the relevant category
         for (int i = 0; i < arr.length(); i++) {
-            JSONObject obj = new JSONObject((String) arr.get(i));
-            if (obj.getString("category").equals(category)){
-                itemList.add(obj.getString("name"));
+            JSONObject obj = (JSONObject) arr.get(i);
+            itemList.add(obj.getString("name"));
 
-                // put in map for easy access later when we go to an item page, might as well
-                nameToJSONObjMap.put(obj.getString("name"), obj);
-            }
+            // EDIT: this is stupid we can just query JSON
+            // put in map for easy access later when we go to an item page, might as well
+            //nameToJSONObjMap.put(obj.getString("name"), obj);
         }
         return itemList;
     }
