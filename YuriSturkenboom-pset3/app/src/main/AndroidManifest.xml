@@ -27,7 +27,8 @@
                 android:name="PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".MenuListActivity"></activity>
+        <activity android:name=".MenuListActivity" />
+        <activity android:name=".ItemShowActivity"></activity>
     </application>
 
 </manifest>

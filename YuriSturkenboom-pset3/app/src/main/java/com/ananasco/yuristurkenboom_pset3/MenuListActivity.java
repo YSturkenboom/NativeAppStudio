@@ -1,7 +1,6 @@
 package com.ananasco.yuristurkenboom_pset3;
 
 import android.content.Intent;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -63,9 +61,7 @@ public class MenuListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object o = listView.getItemAtPosition(position);
                 String item = o.toString();
-                //get cost
-                double cost = 0;
-                addToOrder(item, cost);
+                navigateToItem(item, nameToJSONObjMap.get(item));
             }
         });
     }
@@ -82,8 +78,13 @@ public class MenuListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void addToOrder(String itemString, double cost){
-        // blah blah do stuff
+    public void navigateToItem(String itemString, JSONObject obj){
+        Intent intent = new Intent(this, ItemShowActivity.class);
+        intent.putExtra("item_name", itemString);
+        intent.putExtra("origin", category);
+        intent.putExtra("object", obj.toString());
+        startActivity(intent);
+        finish();
     }
 
     public void updateList(List<String> listString) {
