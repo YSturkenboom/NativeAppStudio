@@ -1,6 +1,7 @@
 package com.ananasco.yuristurkenboom_pset3;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
@@ -35,15 +36,19 @@ public class ItemShowActivity extends AppCompatActivity {
     String description;
     Double price;
     String imgUrl;
+    JSONObject obj;
+
+    Order order;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_show);
 
+        order = new Order(this);
         origin = getIntent().getStringExtra("origin");
         try {
-            JSONObject obj = new JSONObject(getIntent().getStringExtra("object"));
+            obj = new JSONObject(getIntent().getStringExtra("object"));
             itemName = obj.getString("name");
             description = obj.getString("description");
             price = Double.parseDouble(obj.getString("price"));
@@ -111,5 +116,11 @@ public class ItemShowActivity extends AppCompatActivity {
         });
         // Add the request to the RequestQueue.
         queue.add(imageRequest);
+    }
+
+    public void addToOrder(View view) {
+        order.addItem(itemName, 1);
+        order.addItem(itemName, 1);
+        System.out.println(order.getItemAmount(itemName));
     }
 }

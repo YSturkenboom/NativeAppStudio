@@ -3,11 +3,13 @@ package com.ananasco.yuristurkenboom_pset3;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -59,7 +61,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void navigateToMenu(String context, String destination){
+    public void goToOrder(View view){
+        Intent intent = new Intent(this, OrderActivity.class);
+        //intent.putExtra("origin", "main");
+        //intent.putExtra("category", destination);
+        startActivity(intent);
+        finish();
+    }
+
+    private void navigateToMenu(String context, String destination){
         Intent intent = new Intent(this, MenuListActivity.class);
         intent.putExtra("origin", "main");
         intent.putExtra("category", destination);
@@ -67,14 +77,14 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    public void updateList(List<String> listString) {
+    private void updateList(List<String> listString) {
         arrayAdapter.clear();
         arrayAdapter.addAll(listString);
         arrayAdapter.notifyDataSetChanged();
     }
 
     // Note: all stuff that needs to be done async needs to be in the listener!
-    public void doVolleyStuff(){
+    private void doVolleyStuff(){
         RequestQueue queue = Volley.newRequestQueue(this);
 
         String location = "https://resto.mprog.nl/";
@@ -108,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // assumed input array in an object: {'bla': ['whatever','stuff']}
-    public List<String> parseJSON(String response) throws JSONException {
+    private List<String> parseJSON(String response) throws JSONException {
         JSONObject object = new JSONObject(response);
         JSONArray arr = object.getJSONArray("categories");
         List<String> list = new ArrayList<>();
