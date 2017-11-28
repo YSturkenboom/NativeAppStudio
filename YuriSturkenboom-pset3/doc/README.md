@@ -18,6 +18,7 @@ Clone the repository or download the zip file if you're on Windows, and you shou
 Android Studio. From there you can build with Gradle in Android Studio and run.
 
 ## Operation
+Use the menu to navigate to an item and add it to your order. You can use the tabs below to navigate to your order or back to the menu at any time. If you are happy with your order, go to the order menu via the order tab to view the order including the total price, and press order to confirm your order. The estimated waiting time for your order will then be displayed.
 
 ## Notes
 Again: should probably use Fragments, but that is taught in a later assignment. Really hacky use of buttons to make 'tabs', but, it works :)
