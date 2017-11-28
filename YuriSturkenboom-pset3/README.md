@@ -2,6 +2,7 @@
 
 # Chez la Droide
 
+![wireframe](/YuriSturkenboom-pset3/doc/Appstudio%20pset3%20wireframe%20v2.png)
 ![screenie](/YuriSturkenboom-pset3/doc/screenshot.png)
 
 Requires Android Studio to build!
