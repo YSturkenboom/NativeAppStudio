@@ -77,7 +77,7 @@ public class OrderActivity extends AppCompatActivity {
                 System.out.println(nameToJSONObjMap.toString());
                 int cost = nameToJSONObjMap.get(entry.getKey()).getInt("price");
                 int amount = (Integer) entry.getValue();
-                itemList.add(amount + "x " + entry.getKey() + " $" + (cost * amount));
+                itemList.add(amount + "x " + entry.getKey() + ": $" + (cost * amount));
                 finalPrice += cost * amount;
             }
             catch (JSONException e){
@@ -86,6 +86,52 @@ public class OrderActivity extends AppCompatActivity {
         }
         itemArrayAdapter.notifyDataSetChanged();
         ((TextView) findViewById(R.id.total)).setText("$"+finalPrice);
+    }
+
+    public void submitOrder(View view) {
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        String location = "https://resto.mprog.nl/";
+        String endpoint = "order";
+        String url = location + endpoint;
+
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://resto.mprog.nl/order",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            goToOrderTime(new JSONObject(response).getInt("preparation_time"));
+                        }
+                        catch (JSONException e){
+                            System.out.println("If this happens, abandon all hope");
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("Something went wrong with Volley");
+            }
+        }
+        ) {
+            @Override
+            @SuppressWarnings("unchecked")
+            protected Map<String, String> getParams () {
+                //return new HashMap<String, String>((Map)order.getAllItems());
+                return new HashMap<String, String>();
+            }
+        };
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);;
+    }
+
+    public void goToOrderTime(int waitTime) {
+        Intent intent = new Intent(this, OrderTimeActivity.class);
+        intent.putExtra("wait_time", waitTime);
+        startActivity(intent);
+        finish();
+
     }
 
     public void goToMain(View view) {
@@ -128,7 +174,6 @@ public class OrderActivity extends AppCompatActivity {
         });
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
-        System.out.println("wtffffff");
     }
 
     // different from the one in main, there has to be a better way to do this...

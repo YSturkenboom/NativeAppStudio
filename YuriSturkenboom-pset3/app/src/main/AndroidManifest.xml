@@ -27,7 +27,8 @@
                 android:value=".MainActivity" />
         </activity>
         <activity android:name=".MenuListActivity" />
-        <activity android:name=".ItemShowActivity"></activity>
+        <activity android:name=".ItemShowActivity" />
+        <activity android:name=".OrderTimeActivity"></activity>
     </application>
 
 </manifest>
