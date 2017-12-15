@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_margin="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="Add a new car..."/>
+
+    <EditText
+        android:id="@+id/man_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Manufacturer"/>
+    <EditText
+        android:id="@+id/model_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Model"/>
+    <EditText
+        android:id="@+id/price_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Price"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit to DB"
+        android:onClick="addToDB"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="Retrieve a car"/>
+
+    <TextView
+        android:id="@+id/man_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Manufacturer"/>
+    <TextView
+        android:id="@+id/model_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Model"/>
+    <TextView
+        android:id="@+id/price_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Price"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fetch from DB"
+        android:onClick="getFromDB"/>
+
+</LinearLayout>
