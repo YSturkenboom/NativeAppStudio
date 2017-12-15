@@ -5,9 +5,27 @@
     tools:context="com.ananasco.yuristurkenboom_pset5.CategoriesFragment">
 
     <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listView">
-    </ListView>
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:id="@+id/buttonCancel"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Place Order"
+            android:id="@+id/buttonPlace"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
 </FrameLayout>

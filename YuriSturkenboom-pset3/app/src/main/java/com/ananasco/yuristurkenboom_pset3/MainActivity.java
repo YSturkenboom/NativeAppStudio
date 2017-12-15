@@ -28,7 +28,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-// TODO: Vread stuff from JSON, layouts, activity nav., implement assignment, non-anonymous listeners
+// TODO: Vread stuff from JSON, layouts, activity nav., support removing items
+// TODO: non-anonymous listeners
 
 public class MainActivity extends AppCompatActivity {
 
